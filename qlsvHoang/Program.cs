@@ -1,3 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using qlsvHoang.Data;
 namespace qlsvHoang
 {
     public class Program
@@ -5,6 +8,8 @@ namespace qlsvHoang
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<qlsvHoangContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("qlsvHoangContext") ?? throw new InvalidOperationException("Connection string 'qlsvHoangContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
