@@ -1,46 +1,118 @@
-﻿@model qlsvHoang.Models.Admin
+﻿@model qlsvHoang.ViewModel.StudentVM
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>Student</h4>
-<hr />
+
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RoleId" class="control-label"></label>
-                <select asp-for="RoleId" class="form-control">
-                    <option value="3">Student</option>
-                    <option value="1">Admin</option>
-                    <option value="2">Teacher</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        <div class="card rounded-4">
+            <div class="card-body p-5">
+                <div class="justify-content-center" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                    <img src="~/assets/images/logoksth.png" class="mb-4" width="145" alt="">
+                    <h4 class="fw-bold">Register for Student</h4>
+                    <p class="mb-0">Enter your credentials to create your account</p>
+                </div>
+                <div class="form-body my-4">
+                    <form asp-controller="Admins" asp-action="CreateStudent" method="post" asp-route-returnurl="@ViewBag.ReturnUrl" class="row g-3">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="col-12">
+                            <label asp-for="Name" class="form-label"></label>
+                            <sup>*</sup>
+                            <input asp-for="Name" class="form-control" required>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="DateOfBirth" class="form-label"></label>
+                            <sup>*</sup>
+                            <input asp-for="DateOfBirth" class="form-control" required>
+                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Address" class="form-label"></label>
+                            <sup>*</sup>
+                            <input asp-for="Address" class="form-control" required>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="ClassName" class="form-label"></label>
+                            <sup>*</sup>
+                            <input asp-for="ClassName" class="form-control" required>
+                            <span asp-validation-for="ClassName" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="PhoneNumber" class="form-label"></label>
+                            <sup>*</sup>
+                            <input asp-for="PhoneNumber" class="form-control" required>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <input asp-for="RoleId" class="form-control" value="3" type="hidden">
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Username" class="form-label"></label>
+                            <sup>*</sup>
+                            <input asp-for="Username" class="form-control" required>
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Password" class="form-label"></label>
+                            <sup>*</sup>
+                            <div class="input-group" id="show_hide_password">
+                                <input asp-for="Password" class="form-control" required>
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <span class="text-danger">@ViewBag.ErrorMessage</span>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-grid align-content-center d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary mt-5   ">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+    
+    </div>
+</div><!--end row-->
+@if (TempData["ok"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            $.toast({
+                heading: 'Notification',
+                text: "@TempData["ok"]",
+                showHideTransition: 'slide',
+                icon: 'success',
+                position: 'top-center',
+                hideAfter: 3000
+            });
+        });
+    </script>
+}
+else if (TempData["no"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            $.toast({
+                heading: 'Notification',
+                text: "@TempData["no"]",
+                showHideTransition: 'slide',
+                icon: 'error',
+                position: 'top-center',
+                hideAfter: 10000
+            });
+        });
+    </script>
+}
+
 
 @section Scripts {
     @{

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using qlsvHoang.Data;
+using qlsvHoang.Service.IService;
+using qlsvHoang.Service.Service;
 namespace qlsvHoang
 {
     public class Program
@@ -13,6 +15,8 @@ namespace qlsvHoang
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            //DI
+            builder.Services.AddScoped<ITeacherService,TeacherService>();
 
             var app = builder.Build();
 
@@ -33,7 +37,7 @@ namespace qlsvHoang
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Admins}/{action=Index}/{id?}");
 
             app.Run();
         }

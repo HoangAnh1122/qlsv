@@ -1,0 +1,68 @@
+﻿@model qlsvHoang.Models.Teacher
+
+
+@{
+    ViewData["Title"] = "Edit teacher";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div id="stepper3" class="bs-stepper gap-4 vertical linear">
+                <div class="bs-stepper-header" role="tablist">
+                    <div class="step" data-target="#test-vl-3">
+                        <div class="step-trigger" role="tab" id="stepper3trigger3" aria-controls="test-vl-3" aria-selected="false" disabled="disabled">
+                            <div class="bs-stepper-circle"><i class="material-icons-outlined">auto_stories</i></div>
+                            <div class="">
+                                <h5 class="mb-0 steper-title">Education</h5>
+                                <p class="mb-0 steper-sub-title">Education Class</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bs-stepper-content">
+                    <form asp-controller="Admins" asp-action="EditTeacher" method="post">
+                        <div id="test-vl-1" class="bs-stepper-pane content fade active dstepper-block" aria-labelledby="stepper3trigger1">
+                            <h5 class="mb-1">Your Teacher Information</h5>
+                            <p class="mb-4">Edit Teacher information of  University</p>
+                            <div class="row g-3">
+                                <input type="hidden" asp-for="TeacherId" />
+
+                                <div class="col-12 col-lg-6">
+                                    <label asp-for="Name" class="control-label" style="margin-bottom:15px">Name</label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-12 col-lg-6">
+                                    <label asp-for="Email" class="control-label" style="margin-bottom:15px">Email</label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-12 col-lg-6">
+                                    <label asp-for="Address" class="control-label" style="margin-bottom:15px">Address</label>
+                                    <input asp-for="Address" class="form-control" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-12 col-lg-6">
+                                    <label asp-for="PhoneNumber" class="control-label" style="margin-bottom:15px">Phone Number</label>
+                                    <input asp-for="PhoneNumber" class="form-control" />
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <input asp-for="RoleId" class="form-control" value="2" type="hidden">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary px-4"><i class="bx bx-left-arrow-alt me-2"></i>Save</button>
+                                    <a asp-action="ListTeacher" class="btn btn-success px-4">Back to List</a>
+                                </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+

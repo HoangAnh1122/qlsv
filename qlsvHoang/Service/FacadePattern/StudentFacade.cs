@@ -1,13 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using qlsvHoang.Data;
 using qlsvHoang.Models;
+using qlsvHoang.ViewModel;
 
 namespace qlsvHoang.Service.FacadePattern
 {
     public class StudentFacade
     {
-        private readonly Se06303Nhom9Context _context;
+        private readonly qlsvHoangContext _context;
 
-        public StudentFacade(Se06303Nhom9Context context)
+        public StudentFacade(qlsvHoangContext context)
         {
             _context = context;
          
@@ -16,15 +18,21 @@ namespace qlsvHoang.Service.FacadePattern
         // Lấy danh sách sinh viên
         public List<Student> GetAllStudents()
         {
+            
             return _context.Students.Include(s => s.Role).ToList();
         }
 
         // Lấy thông tin sinh viên theo ID
-        public Student? GetStudentById(int id)
+        public async Task<Student?> GetStudentByUserName(string username)
         {
-            return _context.Students.Include(s => s.Role).FirstOrDefault(s => s.StudentId == id);
+            return await _context.Students.Include(s => s.Role).FirstOrDefaultAsync(s => s.Username == username);
         }
 
+        public async Task<Student> GetStudentById(int id)
+        {
+            return await _context.Students.AsNoTracking().FirstOrDefaultAsync(s => s.StudentId == id);
+
+        }
         // Thêm sinh viên mới
         public void AddStudent(Student student)
         {
@@ -33,10 +41,26 @@ namespace qlsvHoang.Service.FacadePattern
         }
 
         // Cập nhật thông tin sinh viên
-        public void UpdateStudent(Student student)
+        public async Task<int> UpdateStudent(Student student)
         {
-            _context.Students.Update(student);
-            _context.SaveChanges();
+            try
+            {
+                //check exit student
+             
+
+             var res=   _context.Students.Update(student);
+             _context.SaveChanges();
+                if(res!=null)
+                {
+                    return 1;
+                }
+                return 0;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // Xóa sinh viên
