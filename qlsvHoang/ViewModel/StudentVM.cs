@@ -51,4 +51,12 @@ namespace qlsvHoang.ViewModel
 
 		public int RoleId { get; set; }
 	}
+
+    public class LoginStudentVM 
+    {
+        public string Username { get; set; } = null!;
+
+        public string Password { get; set; } = null!;
+
+    }
 }

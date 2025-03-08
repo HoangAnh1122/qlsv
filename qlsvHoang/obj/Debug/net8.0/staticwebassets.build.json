@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UMTaWdikQ+Fr0AIWSAyngdB42Dh/TxmDO/5SXUFMCKo=",
+  "Hash": "zAn5e7sloOJgUR4h/cWTeJhh7KBXprx78ylklE7zu9g=",
   "Source": "qlsvHoang",
   "BasePath": "_content/qlsvHoang",
   "Mode": "Default",
@@ -11892,6 +11892,25 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\logoksth.png"
     },
     {
+      "Identity": "G:\\Hoc Web API\\qlsvHoang\\qlsvHoang\\wwwroot\\assets\\images\\logoqlsv.png",
+      "SourceId": "qlsvHoang",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\Hoc Web API\\qlsvHoang\\qlsvHoang\\wwwroot\\",
+      "BasePath": "_content/qlsvHoang",
+      "RelativePath": "assets/images/logoqlsv.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\logoqlsv.png"
+    },
+    {
       "Identity": "G:\\Hoc Web API\\qlsvHoang\\qlsvHoang\\wwwroot\\assets\\images\\megaIcons\\01.png",
       "SourceId": "qlsvHoang",
       "SourceType": "Discovered",
@@ -13714,6 +13733,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "G:\\Hoc Web API\\qlsvHoang\\qlsvHoang\\wwwroot\\css\\style.css",
+      "SourceId": "qlsvHoang",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\Hoc Web API\\qlsvHoang\\qlsvHoang\\wwwroot\\",
+      "BasePath": "_content/qlsvHoang",
+      "RelativePath": "css/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\style.css"
     },
     {
       "Identity": "G:\\Hoc Web API\\qlsvHoang\\qlsvHoang\\wwwroot\\favicon.ico",

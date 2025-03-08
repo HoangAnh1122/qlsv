@@ -10,5 +10,6 @@ namespace qlsvHoang.Service.IService
 		Task<int> updateTeacher(UpdateTeacherVM teacher);
 		Task<int>  deleteTeacher(int id);
 		Task<Teacher> findTeacherById(int id);
+		Task<Teacher> loginTeacher(LoginTeacherVM loginTeacherVM);
 	}
 }

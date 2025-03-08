@@ -28,4 +28,11 @@ namespace qlsvHoang.ViewModel
         public string? Address { get; set; }
     }
 
+	public class LoginTeacherVM
+    {
+        public string Username { get; set; } = null!;
+
+        public string Password { get; set; } = null!;
+
+    }
 }

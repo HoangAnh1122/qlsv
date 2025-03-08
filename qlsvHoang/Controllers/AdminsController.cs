@@ -33,6 +33,12 @@ namespace qlsvHoang.Controllers
         #region Admin
 
         [HttpGet]
+        public IActionResult DashBoard()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult CreateAdmin()
         {
             return View();
@@ -68,14 +74,16 @@ namespace qlsvHoang.Controllers
         {
             try
             {
+
                 var res = await adminService.GetAllAdmins();
                 return View(res);
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
 
+            }
+            //test
         }
 
         [HttpGet]
@@ -148,6 +156,8 @@ namespace qlsvHoang.Controllers
         }
         //Admin Login
 
+
+     
         #endregion
 
 

@@ -78,7 +78,20 @@ namespace qlsvHoang.Service.Service
 
 		}
 
-		public async Task<int> updateTeacher(UpdateTeacherVM teacher)
+        public async Task<Teacher> loginTeacher(LoginTeacherVM loginTeacherVM)
+        {
+			try
+			{
+				var res=await context.Teachers.FirstOrDefaultAsync(x=>x.Username== loginTeacherVM.Username && x.Password==Common.Security.Hash(loginTeacherVM.Password));
+				return res;
+			}
+			catch(Exception e)
+			{
+				throw e;
+			}
+        }
+
+        public async Task<int> updateTeacher(UpdateTeacherVM teacher)
 		{
 			try
 			{

@@ -75,6 +75,12 @@ namespace qlsvHoang.Service.FacadePattern
             }
             return -1;
         }
+
+        public async Task<Student > loginStudent(LoginStudentVM loginStudentVM)
+        {
+            var studentcheck = await _context.Students.FirstOrDefaultAsync(x => x.Username == loginStudentVM.Username && x.Password == Common.Security.Hash(loginStudentVM.Password));
+            return studentcheck;
+        }
     }
 
 }
