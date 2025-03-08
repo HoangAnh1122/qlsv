@@ -1,4 +1,4 @@
-﻿@model qlsvHoang.ViewModel.TeacherVM
+﻿@model qlsvHoang.ViewModel.AdminVM
 
 @{
     ViewData["Title"] = "Create Teacer";
@@ -12,12 +12,24 @@
     <div class="card rounded-4">
         <div class="card-body p-5">
             <div class="justify-content-center" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <h4 class="fw-bold">Register for Teacher</h4>
+                <h4 class="fw-bold">Register for Admin</h4>
                 <p class="mb-0">Enter your credentials to create your account</p>
             </div>
             <div class="form-body my-4">
-                <form asp-controller="Admins" asp-action="CreateTeacher" method="post" asp-route-returnurl="@ViewBag.ReturnUrl" class="row g-3">
+                <form asp-controller="Admins" asp-action="CreateAdmin" method="post" asp-route-returnurl="@ViewBag.ReturnUrl" class="row g-3">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            
+                    <div class="col-12">
+                        <input asp-for="RoleId" class="form-control" value="1" type="hidden">
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Username" class="form-label"></label>
+                        <sup>*</sup>
+                        <input asp-for="Username" class="form-control" required>
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
 
                     <div class="col-12">
                         <label asp-for="Name" class="form-label"></label>
@@ -25,35 +37,7 @@
                         <input asp-for="Name" class="form-control" required>
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-             
-                    <div class="col-12">
-                        <label asp-for="Address" class="form-label"></label>
-                        <sup>*</sup>
-                        <input asp-for="Address" class="form-control" required>
-                        <span asp-validation-for="Address" class="text-danger"></span>
-                    </div>
-            
-                    <div class="col-12">
-                        <label asp-for="PhoneNumber" class="form-label"></label>
-                        <sup>*</sup>
-                        <input asp-for="PhoneNumber" class="form-control" required>
-                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                    </div>
-                    <div class="col-12">
-                        <label asp-for="Email" class="form-label"></label>
-                        <sup>*</sup>
-                        <input asp-for="Email" class="form-control" required>
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="col-12">
-                        <input asp-for="RoleId" class="form-control" value="2" type="hidden">
-                    </div>
-                    <div class="col-12">
-                        <label asp-for="Username" class="form-label"></label>
-                        <sup>*</sup>
-                        <input asp-for="Username" class="form-control" required>
-                        <span asp-validation-for="Username" class="text-danger"></span>
-                    </div>
+
                     <div class="col-12">
                         <label asp-for="Password" class="form-label"></label>
                         <sup>*</sup>

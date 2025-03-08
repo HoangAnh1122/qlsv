@@ -64,14 +64,16 @@ namespace qlsvHoang.Service.FacadePattern
         }
 
         // Xóa sinh viên
-        public void DeleteStudent(int id)
+        public async Task<int> DeleteStudent(int id)
         {
-            var student = _context.Students.Find(id);
+            var student = await _context.Students.FindAsync(id);
             if (student != null)
             {
                 _context.Students.Remove(student);
                 _context.SaveChanges();
+                return 1;
             }
+            return -1;
         }
     }
 

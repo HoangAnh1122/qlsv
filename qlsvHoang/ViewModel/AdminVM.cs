@@ -10,6 +10,16 @@ namespace qlsvHoang.ViewModel
         public string Password { get; set; } = null!;
 
         public int RoleId { get; set; }
+        public string Name { get; set; }
+
+
+    }
+    public class UpdateAdminVM
+    {
+
+        public string Username { get; set; } = null!;
+        public int RoleId { get; set; }
+        public string Name { get; set; }
 
 
     }

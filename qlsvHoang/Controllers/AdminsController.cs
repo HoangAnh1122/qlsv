@@ -19,47 +19,139 @@ namespace qlsvHoang.Controllers
         private readonly StudentFacade facade;
         private readonly qlsvHoangContext _context;
         private readonly ITeacherService service;
+        private readonly IAdminService adminService;
 
-        public AdminsController(qlsvHoangContext context, ITeacherService service)
+        public AdminsController(qlsvHoangContext context, ITeacherService service, IAdminService adminService)
         {
             _context = context;
             this.service = service;
+            this.adminService = adminService;
             facade = new StudentFacade(context);
 
         }
 
-        // GET: Admins
-        public async Task<IActionResult> Index()
+        #region Admin
+
+        [HttpGet]
+        public IActionResult CreateAdmin()
         {
-            var qlsvHoangContext = _context.Admins.Include(a => a.Role);
-            return View(await qlsvHoangContext.ToListAsync());
-        }
-
-        // GET: Admins/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var admin = await _context.Admins
-                .Include(a => a.Role)
-                .FirstOrDefaultAsync(m => m.AdminId == id);
-            if (admin == null)
-            {
-                return NotFound();
-            }
-
-            return View(admin);
-        }
-
-        // GET: Admins/Create
-        public IActionResult Create()
-        {
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId");
             return View();
         }
+        [HttpPost]
+        public async Task<ActionResult> CreateAdmin(AdminVM adminVM)
+        {
+            try
+            {
+                //mapper adminvm to admin
+
+                var admindo = Adapter.AdminAdapter.toAdminDO(adminVM);
+                admindo.Password = Common.Security.Hash(admindo.Password);
+                var res = await adminService.CreateAdmin(admindo);
+                if (res != null)
+                {
+                    TempData["ok"] = "Create Admin Successful!";
+                    return RedirectToAction("ListAdmin", "Admins");
+                }
+                ViewBag.ErrorMessage = "Username already exists. Please choose a different username.";
+                TempData["no"] = "Username already exists. Please choose a different username.";
+                return View();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        [HttpGet]
+        public async Task<ActionResult> ListAdmin()
+        {
+            try
+            {
+                var res = await adminService.GetAllAdmins();
+                return View(res);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> EditAdmin(int id)
+        {
+            try
+            {
+                var res = await adminService.getAdminById(id);
+                if (res != null)
+                {
+                    return View(res);
+
+                }
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        public async Task<ActionResult> EditAdmin(UpdateAdminVM admin)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var res = await adminService.UpdateAdmin(admin);
+                    if (res != 1)
+                    {
+                        ViewBag.ErrorMessage = "ADmin Not Found ";
+                        TempData["no"] = "ADmin Not Found";
+                        return View();
+                    }
+                    TempData["ok"] = "Update  ADmin Successful!";
+                    return RedirectToAction("ListAdmin", "Admins");
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> DeleteAdmin(int id)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var res=await adminService.DeleteAdmin(id);
+                    if(res != 1)
+                    {
+                        TempData["no"] = "Delete Faild";
+                        ViewBag.ErrorMessage = "ADmin Not Found ";
+                        return RedirectToAction("ListAdmin", "Admins");
+                    }
+                    TempData["ok"] = "Delete  ADmin Successful!";
+                    return RedirectToAction("ListAdmin", "Admins");
+                }
+                TempData["no"] = "Delete Faild";
+                return View();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+
+            }
+        }
+        //Admin Login
+
+        #endregion
+
+
+
         #region Student
         [HttpGet]
         public IActionResult CreateStudent()
@@ -142,17 +234,17 @@ namespace qlsvHoang.Controllers
                 try
                 {
                     //check exit student
-                    var exitStudent=await facade.GetStudentById(student.StudentId);
+                    var exitStudent = await facade.GetStudentById(student.StudentId);
                     if (exitStudent == null)
                     {
                         ViewBag.ErrorMessage = "Student ID not Found";
                         TempData["no"] = "Student ID not Found.";
                         return View();
                     }
-                    var mapdata=Adapter.StudentAdapter.toUpdateStudentoDO(student);
-                        mapdata.Password=exitStudent.Password;
-                    
-                    var res= await  facade.UpdateStudent(mapdata);
+                    var mapdata = Adapter.StudentAdapter.toUpdateStudentoDO(student);
+                    mapdata.Password = exitStudent.Password;
+
+                    var res = await facade.UpdateStudent(mapdata);
                     if (res == 0)
                     {
                         ViewBag.ErrorMessage = "Username already exists. Please choose a different username.";
@@ -169,6 +261,29 @@ namespace qlsvHoang.Controllers
                 }
             }
             return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteStudent(int id)
+        {
+            try
+            {
+                var res = await facade.DeleteStudent(id);
+                if (res == -1)
+                {
+
+                    ViewBag.ErrorMessage = "Student not found .";
+                    TempData["no"] = "Student not found. Please choose a different Teacher.";
+                    return RedirectToAction("ListTeacher", "Admins");
+                }
+
+                TempData["ok"] = "Delete Successful !";
+                return RedirectToAction("ListStudent", "Admins");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #endregion
@@ -295,120 +410,6 @@ namespace qlsvHoang.Controllers
 
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Username,Password,RoleId")] AdminVM admin)
-        {
-            if (ModelState.IsValid)
-            {
-                var res = new Admin
-                {
-                    Username = admin.Password,
-                    Password = admin.Password,
-                    RoleId = admin.RoleId,
 
-                };
-
-
-                _context.Admins.Add(res);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId", admin.RoleId);
-            return View(admin);
-        }
-
-
-        // GET: Admins/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var admin = await _context.Admins.FindAsync(id);
-            if (admin == null)
-            {
-                return NotFound();
-            }
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId", admin.RoleId);
-            return View(admin);
-        }
-
-        // POST: Admins/Edit/5
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AdminId,Username,Password,RoleId")] Admin admin)
-        {
-            if (id != admin.AdminId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(admin);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AdminExists(admin.AdminId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId", admin.RoleId);
-            return View(admin);
-        }
-
-        // GET: Admins/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var admin = await _context.Admins
-                .Include(a => a.Role)
-                .FirstOrDefaultAsync(m => m.AdminId == id);
-            if (admin == null)
-            {
-                return NotFound();
-            }
-
-            return View(admin);
-        }
-
-
-        // POST: Admins/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var admin = await _context.Admins.FindAsync(id);
-            if (admin != null)
-            {
-                _context.Admins.Remove(admin);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool AdminExists(int id)
-        {
-            return _context.Admins.Any(e => e.AdminId == id);
-        }
     }
 }

@@ -42,8 +42,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Admins/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5zXENyZWF0ZS5jc2h0bWw=
+[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Admins/CreateAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5zXENyZWF0ZUFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Admins/CreateStudent.cshtml]
@@ -54,16 +54,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5zXENyZWF0ZVRlYWNoZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Admins/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5zXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Admins/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5zXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Admins/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5zXEVkaXQuY3NodG1s
+[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Admins/EditAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5zXEVkaXRBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Admins/EditStudent.cshtml]
@@ -74,8 +66,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5zXEVkaXRUZWFjaGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Admins/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5zXEluZGV4LmNzaHRtbA==
+[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Admins/ListAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5zXExpc3RBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Admins/ListStudent.cshtml]
@@ -96,6 +88,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Authen/LoginTeacher.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVuXExvZ2luVGVhY2hlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Course/ListCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXExpc3RDb3Vyc2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Home/Index.cshtml]
