@@ -59,4 +59,12 @@ namespace qlsvHoang.ViewModel
         public string Password { get; set; } = null!;
 
     }
+
+    public class ChangePasswordVM
+    {
+        public string oldPassword { get; set; } = null!;
+		public string newPassword { get; set; } = null!;
+		public string confirmNewPassword { get; set; } = null!;
+
+	}
 }

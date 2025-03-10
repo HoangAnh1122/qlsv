@@ -178,5 +178,11 @@ namespace qlsvHoang.Controllers
             TempData["ok"] = "See you again!";
             return Redirect("/");
         }
+
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

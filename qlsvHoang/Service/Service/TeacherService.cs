@@ -91,7 +91,32 @@ namespace qlsvHoang.Service.Service
 			}
         }
 
-        public async Task<int> updateTeacher(UpdateTeacherVM teacher)
+		public async Task<int> updatePassword(Teacher teacher)
+		{
+			try
+			{
+				//check exit teacher
+				var checkexit = await context.Teachers.FindAsync(teacher.TeacherId);
+				if (checkexit == null)
+				{
+					return -1;
+				}
+				//map
+	
+
+				//update
+				context.Teachers.Update(teacher);
+				await context.SaveChangesAsync();
+				return 1;
+
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
+		public async Task<int> updateTeacher(UpdateTeacherVM teacher)
 		{
 			try
 			{

@@ -1,0 +1,87 @@
+﻿@model qlsvHoang.Models.Student
+@{
+    ViewData["Title"] = "Admin DashBoard";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row gutters">
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body">
+
+                    <form asp-action="ProfileStudent" method="post">
+                        <input type="hidden" asp-for="StudentId" />
+                        <input type="hidden" asp-for="StudentId" name="majorId" value="@ViewBag.MajorId" />
+
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h4 class="mb-2 text-primary"><strong>Student Information</strong></h4>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
+                                <div class="form-group">
+                                    <label asp-for="Name">Full Name</label>
+                                    <input asp-for="Name" class="form-control" id="fullName" required>
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
+                                <div class="form-group">
+                                    <label asp-for="DateOfBirth">Data of Birth</label>
+                                    <input asp-for="DateOfBirth" type="date" class="form-control" id="dateofBirth" required>
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
+                                <div class="form-group">
+                                    <label asp-for="Address">Address</label>
+                                    <input asp-for="Address" class="form-control" id="address" required>
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
+                                <div class="form-group">
+                                    <label asp-for="PhoneNumber">Phone Number</label>
+                                    <input asp-for="PhoneNumber" class="form-control" id="phoneNumber" required>
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+              
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
+                                <div class="form-group">
+                                    <label asp-for="Username">User Name</label>
+                                    <input asp-for="Username" class="form-control" id="ClassName" readonly>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
+                                <div class="form-group">
+                                    <label asp-for="ClassName">ClassName</label>
+                                    <input asp-for="ClassName" class="form-control" id="ClassName"  required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-3">
+                                <div class="text-right">
+                                    <button type="button" value="Cancel" id="submit" class="btn btn-secondary">Cancel</button>
+                                    <button type="submit" value="Save" id="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -82,6 +82,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5zXExpc3RUZWFjaGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Authen/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVuXEFjY2Vzc0RlbmllZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Authen/LoginAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVuXExvZ2luQWRtaW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -94,8 +98,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVuXExvZ2luVGVhY2hlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Course/CreateCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXENyZWF0ZUNvdXJzZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Course/ListCourse.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXExpc3RDb3Vyc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Course/UpdateCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXFVwZGF0ZUNvdXJzZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Home/Index.cshtml]
@@ -126,12 +138,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Students/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Students/DashBoard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcRGFzaEJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Students/ProfileStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcUHJvZmlsZVN0dWRlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Teachers/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Teachers/DashBoard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcRGFzaEJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/Teachers/ProfileTeacher.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcUHJvZmlsZVRlYWNoZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Hoc Web API/qlsvHoang/qlsvHoang/Views/_ViewImports.cshtml]

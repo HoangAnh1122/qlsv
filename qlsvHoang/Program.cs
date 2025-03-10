@@ -23,6 +23,7 @@ namespace qlsvHoang
                     options.LoginPath = "/Authen/LoginAdmin";
                     options.LoginPath = "/Authen/LoginStudent";
                     options.LoginPath = "/Authen/LoginTeacher";
+                    options.AccessDeniedPath = "/Authen/AccessDenied";
                     options.ExpireTimeSpan = TimeSpan.FromDays(15);
                 });
 
@@ -31,8 +32,9 @@ namespace qlsvHoang
             //DI
             builder.Services.AddScoped<ITeacherService, TeacherService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
+            builder.Services.AddScoped<ICourseService, CourseService>();
 
-            var app = builder.Build();
+			var app = builder.Build();
 
 
             //Authorize 

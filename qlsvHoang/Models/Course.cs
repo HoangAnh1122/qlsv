@@ -13,3 +13,5 @@ public partial class Course
 
     public virtual ICollection<Session> Sessions { get; set; } = new List<Session>();
 }
+
+

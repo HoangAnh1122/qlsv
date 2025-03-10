@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -32,13 +33,16 @@ namespace qlsvHoang.Controllers
 
         #region Admin
 
+        
         [HttpGet]
+        [Authorize(Roles ="Admin")]
         public IActionResult DashBoard()
         {
             return View();
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateAdmin()
         {
             return View();
@@ -70,6 +74,7 @@ namespace qlsvHoang.Controllers
 
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> ListAdmin()
         {
             try
@@ -87,6 +92,7 @@ namespace qlsvHoang.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditAdmin(int id)
         {
             try
@@ -105,6 +111,7 @@ namespace qlsvHoang.Controllers
             }
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditAdmin(UpdateAdminVM admin)
         {
             if (ModelState.IsValid)
@@ -129,6 +136,7 @@ namespace qlsvHoang.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteAdmin(int id)
         {
             try
@@ -164,11 +172,13 @@ namespace qlsvHoang.Controllers
 
         #region Student
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateStudent()
         {
             return View("~/Views/Admins/CreateStudent.cshtml");
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> CreateStudent(StudentVM model)
         {
             if (ModelState.IsValid)
@@ -201,6 +211,7 @@ namespace qlsvHoang.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> ListStudent()
         {
             try
@@ -218,6 +229,7 @@ namespace qlsvHoang.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditStudent(int id)
         {
             try
@@ -236,6 +248,7 @@ namespace qlsvHoang.Controllers
             }
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditStudent(EditStudentVM student)
         {
             if (ModelState.IsValid)
@@ -274,6 +287,7 @@ namespace qlsvHoang.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteStudent(int id)
         {
             try
@@ -304,6 +318,7 @@ namespace qlsvHoang.Controllers
         #region Teacher
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> ListTeacher()
         {
             try
@@ -319,6 +334,7 @@ namespace qlsvHoang.Controllers
             }
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateTeacher()
         {
 
@@ -326,6 +342,7 @@ namespace qlsvHoang.Controllers
 
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> CreateTeacher(TeacherVM model)
         {
             if (ModelState.IsValid)
@@ -356,6 +373,7 @@ namespace qlsvHoang.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditTeacher(int id)
         {
             var res = await service.findTeacherById(id);
@@ -369,6 +387,7 @@ namespace qlsvHoang.Controllers
 
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditTeacher(UpdateTeacherVM teacher)
         {
             if (ModelState.IsValid)
@@ -394,6 +413,7 @@ namespace qlsvHoang.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteTeacher(int id)
         {
             try
