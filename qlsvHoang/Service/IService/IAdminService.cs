@@ -11,6 +11,6 @@ namespace qlsvHoang.Service.IService
 		Task<int> DeleteAdmin(int id);
 		Task<List<Admin>> GetAllAdmins();
 
-		Task<bool> LoginAdmin(AdminLoginVM adminLogin);
+		Task<Admin> LoginAdmin(AdminLoginVM adminLogin);
 	}
 }

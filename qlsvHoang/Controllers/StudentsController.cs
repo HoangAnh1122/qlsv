@@ -1,163 +1,144 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using qlsvHoang.Data;
 using qlsvHoang.Models;
+using qlsvHoang.Service.FacadePattern;
+using qlsvHoang.ViewModel;
 
 namespace qlsvHoang.Controllers
 {
-    public class StudentsController : Controller
-    {
-        private readonly qlsvHoangContext _context;
+	public class StudentsController : Controller
+	{
+		private readonly qlsvHoangContext _context;
+		private readonly StudentFacade facade;
 
-        public StudentsController(qlsvHoangContext context)
-        {
-            _context = context;
-        }
+		public StudentsController(qlsvHoangContext context)
+		{
+			_context = context;
+			facade = new StudentFacade(context);
+		}
 
-        // GET: Students
-        public async Task<IActionResult> Index()
-        {
-            var qlsvHoangContext = _context.Students.Include(s => s.Role);
-            return View(await qlsvHoangContext.ToListAsync());
-        }
+		[Authorize(Roles = "Student")]
+		public IActionResult DashBoard()
+		{
+			return View();
+		}
 
-        // GET: Students/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+		[HttpGet]
+		[Authorize(Roles = "Student")]
+		public async Task<IActionResult> ProfileStudent()
+		{
+			try
+			{
 
-            var student = await _context.Students
-                .Include(s => s.Role)
-                .FirstOrDefaultAsync(m => m.StudentId == id);
-            if (student == null)
-            {
-                return NotFound();
-            }
+				var studentId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            return View(student);
-        }
+				var res = await facade.GetStudentById(Int32.Parse(studentId));
+				if (res == null)
+				{
+					TempData["no"] = "Error Student id not found";
+					return RedirectToAction("/");
+				}
 
-        // GET: Students/Create
-        public IActionResult Create()
-        {
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId");
-            return View("~/Views/Admins/CreateStudent.cshtml");
-        }
+				return View(res);
 
-        // POST: Students/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudentId,Username,Name,DateOfBirth,Address,PhoneNumber,Password,ClassName,RoleId")] Student student)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(student);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId", student.RoleId);
-            return View(student);
-        }
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 
-        // GET: Students/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+		}
 
-            var student = await _context.Students.FindAsync(id);
-            if (student == null)
-            {
-                return NotFound();
-            }
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId", student.RoleId);
-            return View(student);
-        }
+		[Authorize(Roles = "Student")]
+		[HttpPost]
+		public async Task<ActionResult> ProfileStudent(EditStudentVM student)
+		{
+			if (ModelState.IsValid)
+			{
 
-        // POST: Students/Edit/5
-  
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StudentId,Username,Name,DateOfBirth,Address,PhoneNumber,Password,ClassName,RoleId")] Student student)
-        {
-            if (id != student.StudentId)
-            {
-                return NotFound();
-            }
+				try
+				{
+					//check exit student
+					var exitStudent = await facade.GetStudentById(student.StudentId);
+					if (exitStudent == null)
+					{
+						ViewBag.ErrorMessage = "Student ID not Found";
+						TempData["no"] = "Student ID not Found.";
+						return View();
+					}
+					var mapdata = Adapter.StudentAdapter.toUpdateStudentoDO(student);
+					mapdata.Password = exitStudent.Password;
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(student);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!StudentExists(student.StudentId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId", student.RoleId);
-            return View(student);
-        }
+					var res = await facade.UpdateStudent(mapdata);
+					if (res == 0)
+					{
+						ViewBag.ErrorMessage = "Username already exists. Please choose a different username.";
+						TempData["no"] = "Username already exists. Please choose a different username.";
+						return View();
+					}
 
-        // GET: Students/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+					TempData["ok"] = "Update Student Successful!";
+					return View();
+				}
+				catch (Exception ex)
+				{
+					TempData["no"] = ex.Message;
+					throw ex;
+				}
+			}
+			TempData["no"] = "Update Failed Because validate data";
 
-            var student = await _context.Students
-                .Include(s => s.Role)
-                .FirstOrDefaultAsync(m => m.StudentId == id);
-            if (student == null)
-            {
-                return NotFound();
-            }
+			return View();
+		}
 
-            return View(student);
-        }
 
-        // POST: Students/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var student = await _context.Students.FindAsync(id);
-            if (student != null)
-            {
-                _context.Students.Remove(student);
-            }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+		[HttpGet]
+		[Authorize(Roles = "Student")]
+		public IActionResult ChangePassword()
+		{
+			return View();
+		}
 
-        private bool StudentExists(int id)
-        {
-            return _context.Students.Any(e => e.StudentId == id);
-        }
-    }
+		[HttpPost]
+		[Authorize(Roles = "Student")]
+		public async Task<ActionResult> ChangePassword(ChangePasswordVM changePassword)
+		{
+			if (ModelState.IsValid)
+			{
+
+				var studentId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+				var res = await facade.GetStudentById(Int32.Parse(studentId));
+
+				if (Common.Security.Hash(changePassword.oldPassword) != res.Password)
+				{
+					TempData["no"] = "Old Password Not correct !";
+					return View();
+				}
+				if (changePassword.newPassword != changePassword.confirmNewPassword)
+				{
+					TempData["no"] = "New Password and Confirm New Password not correct !";
+					return View();
+				}
+				res.Password=Common.Security.Hash(changePassword.newPassword);
+				await facade.UpdateStudent(res);
+				TempData["ok"] = "Change Password Sucessful!";
+
+			}
+
+			TempData["no"] = "Data no valid";
+			return View();
+
+		}
+
+	}
 }

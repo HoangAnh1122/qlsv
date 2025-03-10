@@ -1,0 +1,83 @@
+﻿@model qlsvHoang.ViewModel.CourseVM
+
+@{
+    ViewData["Title"] = "Create Course";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+<div class="row">
+
+    <div class="card rounded-4">
+        <div class="card-body p-5">
+            <div class="justify-content-center" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h4 class="fw-bold">Create course</h4>
+                <p class="mb-0">Enter your credentials to create your account</p>
+            </div>
+            <div class="form-body my-4">
+                <form asp-controller="Course" asp-action="CreateCourse" method="post" asp-route-returnurl="@ViewBag.ReturnUrl" class="row g-3">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="col-12">
+                        <label asp-for="CourseName" class="form-label"></label>
+                        <sup>*</sup>
+                        <input asp-for="CourseName" class="form-control" required>
+                        <span asp-validation-for="CourseName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Description" class="form-label"></label>
+                        <sup>*</sup>
+                        <input asp-for="Description" class="form-control" required>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>      
+                    <div class="col-12">
+                        <div class="d-grid align-content-center d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary mt-5   ">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div><!--end row-->
+@if (TempData["ok"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            $.toast({
+                heading: 'Notification',
+                text: "@TempData["ok"]",
+                showHideTransition: 'slide',
+                icon: 'success',
+                position: 'top-center',
+                hideAfter: 3000
+            });
+        });
+    </script>
+}
+else if (TempData["no"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            $.toast({
+                heading: 'Notification',
+                text: "@TempData["no"]",
+                showHideTransition: 'slide',
+                icon: 'error',
+                position: 'top-center',
+                hideAfter: 10000
+            });
+        });
+    </script>
+}
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -2505,6 +2505,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\logoksth.png"
     },
     {
+      "Id": "G:\\Hoc Web API\\qlsvHoang\\qlsvHoang\\wwwroot\\assets\\images\\logoqlsv.png",
+      "PackagePath": "staticwebassets\\assets\\images\\logoqlsv.png"
+    },
+    {
       "Id": "G:\\Hoc Web API\\qlsvHoang\\qlsvHoang\\wwwroot\\assets\\images\\megaIcons\\01.png",
       "PackagePath": "staticwebassets\\assets\\images\\megaIcons\\01.png"
     },
@@ -2879,6 +2883,10 @@
     {
       "Id": "G:\\Hoc Web API\\qlsvHoang\\qlsvHoang\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "G:\\Hoc Web API\\qlsvHoang\\qlsvHoang\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
       "Id": "G:\\Hoc Web API\\qlsvHoang\\qlsvHoang\\wwwroot\\favicon.ico",

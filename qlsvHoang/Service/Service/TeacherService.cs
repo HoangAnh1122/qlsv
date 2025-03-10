@@ -78,6 +78,44 @@ namespace qlsvHoang.Service.Service
 
 		}
 
+        public async Task<Teacher> loginTeacher(LoginTeacherVM loginTeacherVM)
+        {
+			try
+			{
+				var res=await context.Teachers.FirstOrDefaultAsync(x=>x.Username== loginTeacherVM.Username && x.Password==Common.Security.Hash(loginTeacherVM.Password));
+				return res;
+			}
+			catch(Exception e)
+			{
+				throw e;
+			}
+        }
+
+		public async Task<int> updatePassword(Teacher teacher)
+		{
+			try
+			{
+				//check exit teacher
+				var checkexit = await context.Teachers.FindAsync(teacher.TeacherId);
+				if (checkexit == null)
+				{
+					return -1;
+				}
+				//map
+	
+
+				//update
+				context.Teachers.Update(teacher);
+				await context.SaveChangesAsync();
+				return 1;
+
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
 		public async Task<int> updateTeacher(UpdateTeacherVM teacher)
 		{
 			try
