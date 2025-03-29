@@ -100,8 +100,47 @@ namespace qlsvHoang.Controllers
 		}
 
 
-
 		[HttpGet]
+		public async Task<ActionResult> CreateStudent()
+		{
+
+			return View();
+		}
+
+        [HttpPost]
+    
+        public async Task<ActionResult> CreateStudent(StudentVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var existingStudent = await facade.GetStudentByUserName(model.Username);
+                    if (existingStudent != null)
+                    {
+                        ViewBag.ErrorMessage = "Username already exists. Please choose a different username.";
+                        TempData["no"] = "Username already exists. Please choose a different username.";
+                        return View();
+                    }
+                    //map to do
+                    var student = Adapter.StudentAdapter.toStudentDO(model);
+
+                    student.Password = Common.Security.Hash(model.Password);
+                    student.RoleId = model.RoleId;
+                    facade.AddStudent(student);
+                    TempData["ok"] = "Create Student Successful!";
+                    return RedirectToAction("LoginStudent", "Authen");
+                }
+                catch (Exception ex)
+                {
+                    var mess = $"{ex.Message} ";
+                    // Log the error (uncomment ex variable name and write a log.)
+                }
+            }
+            return View();
+        }
+
+        [HttpGet]
 		[Authorize(Roles = "Student")]
 		public IActionResult ChangePassword()
 		{
